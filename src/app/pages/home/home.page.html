@@ -1,0 +1,30 @@
+<ion-header class="ion-no-border" [translucent]="true">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref="search-chef"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <strong>What's up, Joy!</strong>
+    <span class="sub-header">categories</span>
+
+
+
+    <span class="todays-header">TODAY'S TASKs</span>
+    <div class="task-list">
+      
+    </div>
+  </div>
+
+  <ion-fab id="trigger-button" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button mode="ios">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-modal mode="ios" trigger="trigger-button" [isOpen]="false" [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="1">
+    <ng-template>
+    </ng-template>
+  </ion-modal>
+</ion-content>
