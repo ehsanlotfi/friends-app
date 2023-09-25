@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-part-details',
@@ -6,14 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./part-details.page.scss'],
 })
 export class PartDetailsPage implements OnInit {
-
+wordSelected:string;
+segId:string="en"
   translate = "سلام من ترجمه هستم ";
   words="Hello, I am a translator"
   value;
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-    this.value = this.translate.split(' ').map(t => {
+    this.value = this.words.split(' ').map(t => {
       
       return '<span>' + t + '</span>'
     }).join(' ')
@@ -23,31 +25,11 @@ export class PartDetailsPage implements OnInit {
 
     if ((e.target as HTMLElement).tagName === 'SPAN') { 
       let target = e.target as HTMLElement;
-      alert(target.innerHTML)
+      this.wordSelected=target.innerHTML
+    
     }
   }
 
-  public actionSheetButtons = [
-    {
-      text: 'Delete',
-      role: 'destructive',
-      data: {
-        action: 'delete',
-      },
-    },
-    {
-      text: 'Share',
-      data: {
-        action: 'share',
-      },
-    },
-    {
-      text: 'Cancel',
-      role: 'cancel',
-      data: {
-        action: 'cancel',
-      },
-    },
-  ];
+
 
 }

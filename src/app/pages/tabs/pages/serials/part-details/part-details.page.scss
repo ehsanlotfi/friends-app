@@ -16,3 +16,41 @@ p {
 .text-right {
     text-align: right;
 }
+
+.block {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ion-modal {
+    --height: auto;
+}
+
+.row-word {
+    border-bottom: 1px solid #74787e
+}
+
+.row-btn {
+    display: flex;
+    justify-content: center;
+}
+
+ion-segment {
+    --background: #0d0d0d;
+    padding: 3px;
+
+    ion-segment-button {
+        --background-checked: #243158;
+        --color-checked: #0d0d0d;
+        --indicator-color: #4d4d4d;
+        font-size: 18px;
+        --color: #fff
+    }
+}
+.word-selected{
+    font-size: 16px;
+    font-weight: 800;
+}
