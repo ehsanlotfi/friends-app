@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>سریال</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content >
+  <div class="ch-menu">
+    <p>دهه 2010</p>
+    <div class="wrapper">
+      <div class="item" *ngFor="let item of listSerials" (click)="goToDetails(item.id)">
+        <img id="img" src="assets/images/serial-img/{{item.img}}">
+        <p>{{item.title|slice:0:4}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ch-menu">
+    <p>دهه 2010</p>
+    <div class="wrapper">
+      <div class="item" *ngFor="let item of listSerials" >
+        <img id="img" src="assets/images/serial-img/{{item.img}}" (click)="goToDetails(item.id)">
+        <p>{{item.title|slice:0:4}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="ch-menu">
+    <p>ماجرایویی</p>
+    <div class="wrapper">
+      <div class="item" *ngFor="let item of listSerials">
+        <img id="img" src="assets/images/serial-img/{{item.img}}">
+        <p>{{item.title|slice:0:4}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="ch-menu">
+    <p>کمدی</p>
+    <div class="wrapper">
+      <div class="item" *ngFor="let item of listSerials">
+        <img id="img" src="assets/images/serial-img/{{item.img}}">
+        <p>{{item.title|slice:0:4}}</p>
+      </div>
+    </div>
+  </div>
+</ion-content>
