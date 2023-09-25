@@ -16,6 +16,10 @@ const routes: Routes = [
   {
     path: 'serial-details/:id',
     loadChildren: () => import('./serial-details/serial-details.module').then( m => m.SerialDetailsPageModule)
+  },
+  {
+    path: 'part-details/:serialId/:id',
+    loadChildren: () => import('./part-details/part-details.module').then( m => m.PartDetailsPageModule)
   }
 ];
 

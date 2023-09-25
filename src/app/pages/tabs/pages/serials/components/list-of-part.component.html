@@ -1,6 +1,6 @@
 <div *ngFor="let item of listParts">
   
-    <div class="upperBox">
+    <div class="upperBox" (click)="goToPartDetails(item.id)">
       <div class="img">
         <img src="assets/images/serial-img/{{item.img}}">
       </div>
