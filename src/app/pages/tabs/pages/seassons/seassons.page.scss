@@ -1,0 +1,26 @@
+ion-card{
+    font-size: 15px;
+    ion-card-header{
+        ion-card-subtitle{
+            font-size: 15px;
+        }
+        ion-card-title{
+            font-size: 17px;
+        }
+    }
+}
+ion-row{
+    direction: rtl;
+}
+.col-chip{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+ion-chip{
+    ion-label{
+        color:var(--ion-text-color, #000);
+        font-size: 10px;
+    }
+}

@@ -5,7 +5,7 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: 'app',
     component: TabsPage,
     children: [
       {
@@ -13,20 +13,22 @@ const routes: Routes = [
         loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
       },
       {
-        path: 'serials',
-        loadChildren: () => import('./pages/serials/serials.module').then(m => m.SerialsPageModule)
+        path: 'seassons',
+        loadChildren: () => import('./pages/seassons/seassons.module').then(m => m.SeassonsPageModule)
       },
       {
-        path: 'profile',
-        loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
+        path: ':seasonId/detail',
+        loadChildren: () => import('./pages/season-deatails/season-deatails.module').then( m => m.SeasonDeatailsPageModule)
+      },
+      {
+        path: ':seasonId/episods',
+        loadChildren: () => import('./pages/episods/episods.module').then( m => m.EpisodsPageModule)
       },
     ],
   },
-  {
-    path:'',
-    redirectTo:'tabs/serials',
-    pathMatch:"full"
-  }
+
+  
+  
 ];
 
 @NgModule({

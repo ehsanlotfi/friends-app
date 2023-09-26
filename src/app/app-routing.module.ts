@@ -1,28 +1,16 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard';
-
 const routes: Routes = [
-
   {
     path: '',
-    redirectTo: 'auth',
+    redirectTo: 'app/seassons',
     pathMatch: 'full'
   },
   {
-    path: 'auth',
-    loadChildren: () => import('./pages/auth/auth.module').then( m => m.AuthPageModule),
-   
-  },
-  {
-    path: 'tabs',
+    path: '',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
-    // canActivate:[AuthGuard]
-  },
-  {
-    path: 'upload-image',
-    loadChildren: () => import('./pages/upload-image/upload-image.module').then( m => m.UploadImagePageModule)
-  },
+  }
+
 ];
 
 @NgModule({

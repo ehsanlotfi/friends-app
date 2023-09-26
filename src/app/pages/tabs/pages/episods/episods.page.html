@@ -1,0 +1,21 @@
+<app-header [title]="title" [defaultHref]="'/'" (click)="back()">
+
+</app-header>
+
+<ion-content>
+  <div *ngFor="let season of seasons">
+    <ion-card   *ngFor="let episode of season.episodes" class="ion-padding ion-text-right">
+      <ion-card-header class="ion-no-padding">
+        <ion-card-title>
+          {{episode.title}}
+        </ion-card-title>
+        <ion-card-subtitle>قسمت :{{season.number}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="ion-margin-top">
+        {{episode.summary}}
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+</ion-content>

@@ -1,0 +1,64 @@
+<app-header title="سریال فرندز"></app-header>
+<ion-content>
+  <ion-card class="ion-margin ion-padding ion-text-right" *ngFor="let season of seasons"
+
+    (click)="goToDetail(season)"
+    >
+    <img alt="Silhouette of mountains" src="assets/img/friends.jfif" />
+    <ion-card-header class="ion-no-padding">
+      <ion-card-title>
+        {{season.title}}
+      </ion-card-title>
+      <ion-card-subtitle>فصل :{{season.number}}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content class="ion-margin-top">
+      {{season.summary}}
+    </ion-card-content>
+    <ion-card-content class="ion-no-padding">
+      <ion-row>
+        <ion-col size="4" class="ion-text-right">
+          <ion-label>تاریخ انتشار :</ion-label>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          {{season.date}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" class="ion-text-right">
+          <ion-label>کارگردان :</ion-label>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          {{season.director}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-label>نویسنده :</ion-label>
+        <div class="col-chip">
+          <ion-chip *ngFor="let item of season.writers">
+            <ion-avatar>
+              <img [alt]="item" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+            <ion-label>{{item}}</ion-label>
+          </ion-chip>
+        </div>
+      </ion-row>
+
+      <ion-row>
+        <ion-label>بازیگران :</ion-label>
+
+
+        <div class="col-chip">
+          <ion-chip *ngFor="let item of season.stars">
+            <ion-avatar>
+              <img [alt]="item" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+            <ion-label>{{item}}</ion-label>
+          </ion-chip>
+        </div>
+
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

@@ -1,15 +1,11 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ParallaxDirective } from './directives/parallax.directive';
-import { HideHeaderDirective } from './directives/hide-header.directive';
-
+import * as _partials from 'src/app/partials/index';
 
 @NgModule({
   declarations: [
-    ParallaxDirective,
-    HideHeaderDirective
+    _partials.HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -24,8 +20,7 @@ import { HideHeaderDirective } from './directives/hide-header.directive';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ParallaxDirective,
-    HideHeaderDirective
+    _partials.HeaderComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
