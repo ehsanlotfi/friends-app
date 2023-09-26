@@ -3,8 +3,10 @@
 </app-header>
 
 <ion-content>
-  <div *ngFor="let season of seasons">
-    <ion-card   *ngFor="let episode of season.episodes" class="ion-padding ion-text-right">
+  <div *ngFor="let season of seasons" >
+    <ion-card   *ngFor="let episode of season.episodes" 
+    (click)="goToQuotes(episode)"
+    class="ion-padding ion-text-right">
       <ion-card-header class="ion-no-padding">
         <ion-card-title>
           {{episode.title}}

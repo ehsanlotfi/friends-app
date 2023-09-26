@@ -1,0 +1,28 @@
+ion-list{
+    --background-color:transparent ;
+    background:transparent !important;
+    ion-item{
+        color: #74787e;
+        --border-color:#d4d7db;
+        --background:transparent;
+        border:none;
+        --padding-start:0;
+        --inner-padding-end:0;
+       
+        .bar-chart-outline{
+    
+            color:#06ae2b;
+             
+        }
+        ion-label{
+            text-overflow:none !important;
+             white-space: break-spaces !important;
+             font-size: 14px;
+        }
+    
+    }
+ 
+    .direction-rtl{
+        direction: rtl;
+    }
+ }

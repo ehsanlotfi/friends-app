@@ -17,3 +17,10 @@ export interface Quote
     CntSeen: number,
     showTrans?: boolean
 }
+
+export interface Lightner{
+    IdQuote: number;
+    seasonId: number;
+    fa:string;
+    en:string;
+}

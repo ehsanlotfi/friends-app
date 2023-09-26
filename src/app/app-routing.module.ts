@@ -6,9 +6,14 @@ const routes: Routes = [
     redirectTo: 'app/seassons',
     pathMatch: 'full'
   },
+  
   {
     path: '',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
+  },
+  {
+    path: 'lightner',
+    loadChildren: () => import('./pages/lightner/lightner.module').then( m => m.LightnerPageModule)
   }
 
 ];

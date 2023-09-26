@@ -102,3 +102,6 @@ export const fakeData: _mod.Quote[] = [
         "CntSeen": 1
     }
 ]
+
+
+export const Lightner:_mod.Lightner[]=[]

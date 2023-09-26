@@ -26,4 +26,8 @@ export class EpisodsPage implements OnInit {
   {
     this.nav.navigateBack(['/app', this.seasons[0].number,'detail']);
   }
+  goToQuotes(episode){
+    this.nav.navigateForward(['/app', this.seasons[0].number,'episods', episode.number]);
+
+  }
 }

@@ -1,0 +1,26 @@
+
+<app-header title="لایتنر" [color]="'primary'"> </app-header>
+<ion-content>
+<ion-content>
+  <ion-row *ngFor="let word of listWord">
+    <ion-list class="w-100">
+      <ion-item>
+        <ion-col size="6" class="ion-text-left">
+          <ion-label>
+            {{word.en}}
+            <ion-icon name="volume-high-sharp"></ion-icon>
+          </ion-label>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right"> 
+          <ion-label>
+            {{word.fa}}
+            <ion-icon name="bar-chart-outline"></ion-icon>
+          </ion-label>
+    
+        </ion-col>
+      </ion-item>
+    </ion-list>
+
+  </ion-row>
+
+</ion-content>

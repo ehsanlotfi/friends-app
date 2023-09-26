@@ -24,8 +24,13 @@ const routes: Routes = [
         path: ':seasonId/episods',
         loadChildren: () => import('./pages/episods/episods.module').then( m => m.EpisodsPageModule)
       },
+      {
+        path: ':seasonId/episods/:episodeId',
+        loadChildren: () => import('./pages/quotes/quotes.module').then( m => m.QuotesPageModule)
+      },
     ],
   },
+ 
 
   
   

@@ -5,7 +5,8 @@ import * as _partials from 'src/app/partials/index';
 
 @NgModule({
   declarations: [
-    _partials.HeaderComponent
+    _partials.HeaderComponent,
+    _partials.layouts,
   ],
   imports: [
     CommonModule,
@@ -20,7 +21,8 @@ import * as _partials from 'src/app/partials/index';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    _partials.HeaderComponent
+    _partials.HeaderComponent,
+    _partials.layouts,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
