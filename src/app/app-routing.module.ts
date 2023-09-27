@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'lightner',
     loadChildren: () => import('./pages/lightner/lightner.module').then( m => m.LightnerPageModule)
+  },
+  {
+    path: 'review',
+    loadChildren: () => import('./pages/review/review.module').then( m => m.ReviewPageModule)
   }
 
 ];

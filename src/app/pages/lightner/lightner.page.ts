@@ -16,7 +16,7 @@ listWord=[];
 this.lightnerService.getListLightner().then(list=>{
   this.listWord=list;
 });
- console.table(this.listWord)
+
   }
 
 }

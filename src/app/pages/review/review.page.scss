@@ -1,0 +1,85 @@
+swiper-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+
+ ion-card{
+    height: 68%;
+    width: 82%;
+    margin-top: -5rem;
+    ion-card-content {
+      margin-top: 6rem;
+   }
+    }
+
+    
+
+  }
+
+
+  .row-word {
+    border-bottom: 1px solid #74787e
+}
+
+.row-btn {
+    display: flex;
+    justify-content: center;
+}
+.word-selected{
+
+  font-weight: bolder;
+  color: #000;
+}
+
+.block {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-modal {
+  --height: auto;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px !important;
+
+}
+
+::ng-deep .ion-page{
+border: 1px solid #ccc;
+}
+
+swiper-container::part(button-prev) {
+  border: 1px solid #ccc !important;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px !important;
+  padding: 9px !important;
+  border-radius: 53% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 40px;
+  height: 40px;
+  color: #000;
+}
+
+swiper-container::part(button-next) {
+  border: 1px solid #ccc !important;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px !important;
+  padding: 9px !important;
+  border-radius: 53% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 40px;
+  height: 40px;
+  color: #000;
+}

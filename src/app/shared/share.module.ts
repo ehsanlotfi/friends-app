@@ -23,6 +23,7 @@ import * as _partials from 'src/app/partials/index';
     ReactiveFormsModule,
     _partials.HeaderComponent,
     _partials.layouts,
+   
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>review</ion-title>
+  </ion-toolbar>
+  <ion-buttons>
+    <ion-back-button></ion-back-button>
+  </ion-buttons>
+</ion-header>
+
+<ion-content>
+  <!-------space-between="10" slidesPerView="1" navigation="true"-->
+  <swiper-container class="mySwiper" init="false">
+    <swiper-slide *ngFor="let word of listWord">
+      <ion-card>
+        <ion-card-header>
+          <ion-row class="ion-margin ion-padding row-word">
+            <ion-col size="12">
+              <h3 class="word-selected">{{word.en}}</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <ion-button color="danger">
+                <ion-icon slot="start" name="star"></ion-icon>
+                Uk
+              </ion-button>
+
+              <ion-button class="primary">
+                Us
+                <ion-icon slot="end" name="star"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+
+        </ion-card-header>
+
+        <ion-card-content class="ion-margin">
+          <ion-row class="row-btn">
+            <ion-col size="12">
+              <ion-button expand="block" shape="round" fill="outline" (click)="openModal()">نشان دادن مثال</ion-button>
+            </ion-col>
+            <ion-col size="12">
+              <ion-button expand="block" shape="round" color="medium" (click)="openModal()">نشان دادن معنی</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+
+  </swiper-container>
+
+
+  <ion-modal #modal [isOpen]="true" [initialBreakpoint]="initialBreakpoint" [breakpoints]="[0, 0.25, 0.5, 0.75,1]"
+  [backdropBreakpoint]="backdropBreakpoint"
+  handleBehavior="cycle"
+    [backdropDismiss]="false" >
+    <ng-template>
+   
+      <ion-row class="ion-padding">
+        <ion-col size="6" class="ion-text-center">
+          <ion-button expand="block" color="danger">یادم نیست</ion-button>
+        </ion-col>
+        <ion-col size="6">
+        <ion-button expand="block" color="success" (click)="remember()">یادم هست </ion-button>
+
+        </ion-col>
+
+      </ion-row>
+      <ion-row class="ion-margin ion-padding row-word">
+        <ion-col size="11" class="word-selected">  {{activeRow.en}}</ion-col>
+        <ion-col size="1" class="ion-text-right">
+          <ion-icon name="volume-high-sharp"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <div class="block">
+     {{activeRow.en}}
+    </div>
+ 
+    </ng-template>
+  </ion-modal>
+</ion-content>
