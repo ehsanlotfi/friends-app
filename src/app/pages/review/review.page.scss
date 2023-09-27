@@ -57,6 +57,14 @@ ion-modal {
 ::ng-deep .ion-page{
 border: 1px solid #ccc;
 }
+ion-toolbar {
+  --background: transparent;
+  --opacity: 0;
+}
+
+ion-header {
+  position: absolute;
+}
 
 swiper-container::part(button-prev) {
   border: 1px solid #ccc !important;

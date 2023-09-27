@@ -13,6 +13,10 @@ const routes: Routes = [
         loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
       },
       {
+        path: 'about',
+        loadChildren: () => import('./pages/about-us/about-us.module').then(m => m.AboutUsPageModule)
+      },
+      {
         path: 'seassons',
         loadChildren: () => import('./pages/seassons/seassons.module').then(m => m.SeassonsPageModule)
       },
@@ -27,6 +31,10 @@ const routes: Routes = [
       {
         path: ':seasonId/episods/:episodeId',
         loadChildren: () => import('./pages/quotes/quotes.module').then( m => m.QuotesPageModule)
+      },
+      {
+        path: 'lightner',
+        loadChildren: () => import('./pages/lightner/lightner.module').then( m => m.LightnerPageModule)
       },
     ],
   },

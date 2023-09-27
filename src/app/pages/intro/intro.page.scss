@@ -1,0 +1,43 @@
+
+    swiper-container {
+        width: 100%;
+        height: 100%;
+      }
+      swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       
+    
+     ion-card{
+        height: 68%;
+        width: 82%;
+        box-shadow: none;
+        ion-card-title{
+            font-size: 25px;
+        font-weight: bold;
+        }
+        ion-card-subtitle{
+            font-size: 17px;
+        }
+        ion-card-content {
+         
+          margin-top: 6rem;
+          direction: rtl;
+       }
+        }
+    
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 50px;
+            line-height: 42px;
+          }
+      }
+
+
+
+

@@ -1,4 +1,4 @@
-<app-header [title]="title" (click)="back()">
+<app-header [title]="title" (click)="back()" [color]="'primary'">
 </app-header>
 
 
@@ -7,7 +7,7 @@
     <ion-card class="ion-margin ion-no-padding">
       <ion-card-content class="ion-padding">
         <ion-item>
-          <ion-label [innerHTML]="quote.Content"  (click)="clickSpan({},$event,quote.ID)"></ion-label>
+          <ion-label [innerHTML]="quote.Content" class="text"  (click)="clickSpan({},$event,quote.ID)"></ion-label>
           <ng-container>
             <ion-icon name="bookmark-outline" *ngIf="!quote.CntSeen;else seen" (click)="setLeitnerCard(quote)"></ion-icon>
 
@@ -26,13 +26,13 @@
   <ion-modal #modal  [initialBreakpoint]="1" [breakpoints]="[0, 1]">
     <ng-template>
       <ion-row class="ion-margin ion-padding row-word">
-        <ion-col size="11" class="word-selected"> {{wordSelected}}</ion-col>
+        <ion-col size="11" class="word-selected"><h2> {{wordSelected}}</h2></ion-col>
         <ion-col size="1" class="ion-text-right">
           <ion-icon name="volume-high-sharp"></ion-icon>
         </ion-col>
       </ion-row>
       <ion-row class="row-btn">
-        <ion-col size="10">
+        <ion-col size="11">
           <ion-segment [value]="segId">
             <ion-segment-button value="en">
               <ion-label>English</ion-label>
@@ -49,10 +49,10 @@
       <div class="block">{{wordSelected}}</div>
       <ion-row class="ion-padding">
         <ion-col size="6" class="ion-text-center">
-          <ion-button color="primary" (click)="dismiss()">از پیش دانسته</ion-button>
+          <ion-button expand="full" class="color-gray" color="white" shape="round" (click)="dismiss()">از پیش دانسته</ion-button>
         </ion-col>
         <ion-col size="6">
-          <ion-button color="warning" (click)="addWord(wordSelected)" [disabled]="existenceWord">مرور با لایتنر</ion-button>
+          <ion-button color="warning"   shape="round" expand="full" (click)="addWord(wordSelected)" [disabled]="existenceWord">مرور با لایتنر</ion-button>
 
         </ion-col>
 

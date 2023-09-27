@@ -44,18 +44,26 @@ ion-card{
 }
 
 ion-segment {
-    --background: #0d0d0d;
-    padding: 3px;
+    --background: #b9b8b8;
+    border-radius: 17px;
+    width: 100%;
 
     ion-segment-button {
-        --background-checked: #676767;
+        --background-checked: rgb(254, 255, 255);
         --color-checked: #0d0d0d;
-        --indicator-color: #5ba5d1;
+        --indicator-color:rgb(239, 239, 239) !important;
         font-size: 18px;
         --color: #fff;
+        transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     }
 }
 .word-selected{
-    font-size: 16px;
+ 
     font-weight: 800;
+}
+.text{
+    font-size: 17px !important;
+}
+.color-gray{
+    color: gray;
 }
