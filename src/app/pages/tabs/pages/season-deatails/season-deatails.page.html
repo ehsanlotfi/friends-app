@@ -1,65 +1,101 @@
-<app-header [title]="title" [color]="'primary'" [defaultHref]="'/'" (click)="back()">
+<ion-header #hideheader>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button fill="solid" shape="round" color="light" routerLink="/app/seassons">
+        <ion-icon slot="icon-only" name="arrow-back" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="solid" shape="round" color="light">
+        <ion-icon slot="icon-only" name="share-outline" color="primary"></ion-icon>
+      </ion-button>
+      <ion-button fill="solid" shape="round" color="light">
+        <ion-icon slot="icon-only" name="search-outline" color="primary"></ion-icon>
+      </ion-button>
+      <ion-button fill="solid" shape="round" color="light" [routerLink]="['/app',seasonId+1,'detail']">
 
-</app-header>
+        <ion-icon slot="icon-only"  color="primary" name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-buttons>
 
-<ion-content>
-  <ion-card class="ion-padding ion-text-right ion-no-margin" *ngFor="let season of seasons"  >
-    <ion-img alt="Silhouette of mountains" src="assets/img/friends.jfif" />
-    <ion-card-header class="ion-no-padding">
-      <ion-card-title>
-        {{season.title}}
-      </ion-card-title>
-      <ion-card-subtitle>فصل :{{season.number}}</ion-card-subtitle>
-    </ion-card-header>
-
-    <ion-card-content class="ion-margin-top">
-      {{season.summary}}
-    </ion-card-content>
-    <ion-card-content class="ion-no-padding">
+  </ion-toolbar>
+</ion-header>
+<ion-content [appParallax]="img" scrollEvents="true" [appHideHeader]="hideheader" (ionScroll)="onScroll($event)">
+  <!-- <div #img class="header-bac" [style.background-image]="'url(assets/img/friends.jfif)'"></div> -->
+  <div class="relative">
+    <img id="img" #img src="assets/img/friends.jfif">
+    <div class="content">
       <ion-row>
-        <ion-col size="4" class="ion-text-right">
-          <ion-label>تاریخ انتشار :</ion-label>
+        <ion-col size="5" class="ion-padding">
+          <img class="box-image" src="assets/img/friends.jfif">
+
         </ion-col>
-        <ion-col size="6" class="ion-text-right">
-          {{season.date}}
+        <ion-col size="7">
+          <ion-card class="ion-padding ion-text-right ion-no-margin">
+            <ion-card-header class="ion-no-padding">
+              <ion-card-title>
+                {{seasons.title}}
+              </ion-card-title>
+              <ion-card-subtitle>فصل :{{seasons.number}}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content class="ion-no-padding">
+              <ion-row>
+                <ion-col size="5" class="ion-text-right">
+                  <ion-label>تاریخ انتشار </ion-label>
+                </ion-col>
+                <ion-col size="6" class="ion-text-right">
+                  {{seasons.date}}
+                </ion-col>
+              </ion-row>
+
+            </ion-card-content>
+          </ion-card>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col size="4" class="ion-text-right">
-          <ion-label>کارگردان :</ion-label>
-        </ion-col>
-        <ion-col size="6" class="ion-text-right">
-          {{season.director}}
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-label>نویسنده :</ion-label>
-        <div class="col-chip">
-          <ion-chip *ngFor="let item of season.writers">
-            <ion-avatar>
-              <ion-img [alt]="item" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            </ion-avatar>
-            <ion-label>{{item}}</ion-label>
-          </ion-chip>
-        </div>
-      </ion-row>
+    </div>
+  </div>
+  <div *ngIf="seasons" class="dark-bg ion-padding-start">
+    <ion-label>داستان فیلم :</ion-label>
+    <p>
+      {{seasons.summary}}
+    </p>
+  </div>
 
-      <ion-row>
-        <ion-label>بازیگران :</ion-label>
+  <div>
+    <app-episod-list [Season]="seasons"></app-episod-list>
+  </div>
+  <div class="dark-bg">
+    <ion-row>
+      <ion-col size="4">
+        <ion-label>کارگردان :</ion-label>
+      </ion-col>
+      <ion-col size="6">
+        {{seasons.director}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-label>نویسنده :</ion-label>
+      <div class="col-chip">
+        <ion-chip *ngFor="let item of seasons.writers">
+          <ion-avatar>
+            <ion-img [alt]="item" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>{{item}}</ion-label>
+        </ion-chip>
+      </div>
+    </ion-row>
+    <ion-row>
+      <ion-label>بازیگران :</ion-label>
+      <div class="col-chip">
+        <ion-chip *ngFor="let item of seasons.stars">
+          <ion-avatar>
+            <img [alt]="item" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>{{item}}</ion-label>
+        </ion-chip>
+      </div>
 
-
-        <div class="col-chip">
-          <ion-chip *ngFor="let item of season.stars">
-            <ion-avatar>
-              <img [alt]="item" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            </ion-avatar>
-            <ion-label>{{item}}</ion-label>
-          </ion-chip>
-        </div>
-
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-button expand="block" (click)="goToEpisods()">نمایش قسمت ها</ion-button>
+    </ion-row>
+  </div>
 </ion-content>

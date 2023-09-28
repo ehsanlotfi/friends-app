@@ -14,12 +14,12 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
-    canLoad: [IntroGuard]
+    // canLoad: [IntroGuard]
   },
   {
     path: 'review',
     loadChildren: () => import('./pages/review/review.module').then( m => m.ReviewPageModule),
-    canLoad: [IntroGuard]
+    // canLoad: [IntroGuard]
   },
 
 ];

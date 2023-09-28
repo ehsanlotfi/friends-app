@@ -1,26 +1,130 @@
-ion-card{
-  font-size: 15px;
-  ion-card-header{
-      ion-card-subtitle{
-          font-size: 15px;
-      }
-      ion-card-title{
-          font-size: 17px;
-      }
+ion-header {
+  ion-title {
+    font-size: 10px;
   }
 }
-ion-row{
+
+ion-content {
+  position: absolute;
+  --background:#121c3b;
+
+}
+
+ion-card {
+  font-size: 15px;
+  --background:transparent;
+  --ion-background-color:transparent;
+  box-shadow: none;
+  text-align: center;
+  ion-card-header {
+    ion-card-subtitle {
+      font-size: 14px;
+      color: #fff;
+    }
+
+    ion-card-title {
+      font-size: 13px;
+      color: #fff;
+    }
+  }
+  ion-card-content{
+color: #fff;
+  }
+}
+
+ion-row {
   direction: rtl;
 }
-.col-chip{
+
+.col-chip {
   display: flex;
   justify-content: start;
   align-items: center;
 }
 
-ion-chip{
-  ion-label{
-      color:var(--ion-text-color, #000);
-      font-size: 10px;
+ion-chip {
+  ion-label {
+ 
+    font-size: 10px;
   }
+}
+.content{
+  position: absolute;
+  top: 6rem;
+  width: 100%;
+}
+
+.dark-bg {
+  background:#040b23;
+  z-index: 10;
+  color: #fff;
+  direction: rtl;
+  line-height: 39px;
+}
+.relative{
+  position: relative;
+  height: 50vh;
+    background: black;
+    overflow: hidden;
+    #img{
+      width: 100%;
+      object-fit: cover;
+      opacity: 0.3;
+      height: 100%;
+      filter: blur(10px);
+      will-change: transform;
+      pointer-events: none;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-filter: blur(10px);
+      -moz-filter: blur(10px);
+      -ms-filter: blur(10px);
+      -o-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+    .box-image{
+      width:  100%;
+      height:10rem;
+      object-fit: cover;
+      will-change: transform;
+      box-shadow: inset 0 0 0 50vw rgba(255, 255, 255, 0.2);
+    }
+}
+
+
+
+div.header-bac {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  filter: blur(10px);
+  /* makup ? */
+  box-shadow: inset 0 0 0 50vw rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  will-change: transform;
+  background-size: cover;
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -ms-filter: blur(10px);
+  -o-filter: blur(10px);
+  pointer-events: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

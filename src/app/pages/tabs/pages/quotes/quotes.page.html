@@ -1,7 +1,16 @@
-<app-header [title]="title" (click)="back()" [color]="'primary'">
-</app-header>
 
 
+<ion-header #hideheader>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button fill="solid" shape="round" color="light" [routerLink]="['/app',seasonId,'detail']">
+        <ion-icon slot="icon-only" name="arrow-back" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <ion-list *ngFor="let quote of quotes" lines="none">
     <ion-card class="ion-margin ion-no-padding">
@@ -9,11 +18,11 @@
         <ion-item>
           <ion-label [innerHTML]="quote.Content" class="text"  (click)="clickSpan({},$event,quote.ID)"></ion-label>
           <ng-container>
-            <ion-icon name="bookmark-outline" *ngIf="!quote.CntSeen;else seen" (click)="setLeitnerCard(quote)"></ion-icon>
+            <ion-icon name="bookmark-outline" color="primary" *ngIf="!quote.CntSeen;else seen" (click)="setLeitnerCard(quote)"></ion-icon>
 
           </ng-container>
           <ng-template #seen>
-            <ion-icon name="bookmark-sharp" (click)="setLeitnerCard(quote)"></ion-icon> 
+            <ion-icon name="bookmark-sharp" color="primary" (click)="setLeitnerCard(quote)"></ion-icon> 
 
           </ng-template>
         </ion-item>
@@ -25,38 +34,40 @@
   </ion-list>
   <ion-modal #modal  [initialBreakpoint]="1" [breakpoints]="[0, 1]">
     <ng-template>
-      <ion-row class="ion-margin ion-padding row-word">
-        <ion-col size="11" class="word-selected"><h2> {{wordSelected}}</h2></ion-col>
-        <ion-col size="1" class="ion-text-right">
-          <ion-icon name="volume-high-sharp"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row class="row-btn">
-        <ion-col size="11">
-          <ion-segment [value]="segId">
-            <ion-segment-button value="en">
-              <ion-label>English</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="fa">
-              <ion-label>فارسی</ion-label>
-            </ion-segment-button>
-
-          </ion-segment>
-        </ion-col>
-      </ion-row>
-
-
-      <div class="block">{{wordSelected}}</div>
-      <ion-row class="ion-padding">
-        <ion-col size="6" class="ion-text-center">
-          <ion-button expand="full" class="color-gray" color="white" shape="round" (click)="dismiss()">از پیش دانسته</ion-button>
-        </ion-col>
-        <ion-col size="6">
-          <ion-button color="warning"   shape="round" expand="full" (click)="addWord(wordSelected)" [disabled]="existenceWord">مرور با لایتنر</ion-button>
-
-        </ion-col>
-
-      </ion-row>
+      <div class="bg-color">
+        <ion-row class="ion-margin ion-padding row-word">
+          <ion-col size="11" class="word-selected"><h2> {{wordSelected}}</h2></ion-col>
+          <ion-col size="1" class="ion-text-right">
+            <ion-icon name="volume-high-sharp"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-btn">
+          <ion-col size="11">
+            <ion-segment [value]="segId">
+              <ion-segment-button value="en">
+                <ion-label>English</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="fa">
+                <ion-label>فارسی</ion-label>
+              </ion-segment-button>
+  
+            </ion-segment>
+          </ion-col>
+        </ion-row>
+  
+  
+        <div class="block">{{wordSelected}}</div>
+        <ion-row class="ion-padding">
+          <ion-col size="6" class="ion-text-center">
+            <ion-button expand="full" class="color-gray" color="primary" shape="round" (click)="dismiss()">از پیش دانسته</ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button color="warning"   shape="round" expand="full" (click)="addWord(wordSelected)" [disabled]="existenceWord">مرور با لایتنر</ion-button>
+  
+          </ion-col>
+  
+        </ion-row>
+      </div>
     </ng-template>
   </ion-modal>
 </ion-content>

@@ -1,9 +1,13 @@
+ion-content {
+    --background:#121c3b;
+}
+
 ion-list {
     --background-color: transparent;
     background: transparent !important;
 
     ion-item {
-        color: #74787e;
+        color: #fff;
         --border-color: #d4d7db;
         --background: transparent;
         border: none;
@@ -36,7 +40,7 @@ ion-list {
 }
 
 .lightner-box {
-    background: #fff;
+    background-color: #2b175b;
     height: auto;
     margin-bottom: 13px;
     .lower-box{
@@ -53,6 +57,8 @@ ion-list {
             height: 94px;
             line-height: 36px;
             margin-right: 11px;
+            background-color: #121c3b;
+            color: #fff;
         }
     }
 

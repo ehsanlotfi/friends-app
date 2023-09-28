@@ -17,8 +17,6 @@ export class SeassonsPage implements OnInit {
 
   ngOnInit() {
     this.seasons = this.globalService.getAllSeasons();
-    console.table( this.seasons)
-
   }
 
   goToDetail(season){

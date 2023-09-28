@@ -1,3 +1,7 @@
+ion-content {
+    --background:#121c3b;
+}
+
 ion-card{
     --background: transparent;
     box-shadow: none !important;
@@ -6,18 +10,14 @@ ion-card{
     --background-color:transparent ;
     background:transparent !important;
     ion-item{
-        color: #74787e;
+        color: #ffff;
         --border-color:#d4d7db;
         --background:transparent;
         border:none;
         --padding-start:0;
         --inner-padding-end:0;
        
-        ion-icon{
-    
-            color:#243158;
-             
-        }
+   
         ion-label{
             text-overflow:none !important;
              white-space: break-spaces !important;
@@ -66,4 +66,9 @@ ion-segment {
 }
 .color-gray{
     color: gray;
+}
+
+.bg-color {
+    background-color: #030319 !important;
+    color: #fff !important;
 }

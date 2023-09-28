@@ -1,7 +1,10 @@
 <ion-header class="ion-no-border">
-  <ion-buttons>
-    <ion-back-button></ion-back-button>
-  </ion-buttons>
+  <ion-toolbar >
+    <ion-buttons >
+      <ion-back-button defaultHref="/lightner"></ion-back-button>
+    </ion-buttons>
+
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -53,7 +56,7 @@
   handleBehavior="cycle"
     [backdropDismiss]="false" >
     <ng-template>
-   
+      <div class="bg-color">
       <ion-row class="ion-padding">
         <ion-col size="6" class="ion-text-center">
           <ion-button expand="block" color="danger">یادم نیست</ion-button>
@@ -73,7 +76,7 @@
       <div class="block">
      {{activeRow.en}}
     </div>
- 
+      </div>
     </ng-template>
   </ion-modal>
 </ion-content>

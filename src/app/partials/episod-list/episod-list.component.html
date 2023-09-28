@@ -1,0 +1,16 @@
+
+  <ion-card   *ngFor="let episode of seasons.episodes" 
+  (click)="goToQuotes(episode)"
+  class="ion-padding ion-text-right">
+    <ion-card-header class="ion-no-padding">
+      <ion-card-title>
+        {{episode.title}}
+      </ion-card-title>
+      <ion-card-subtitle>قسمت :{{episode.number}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content class="ion-margin-top">
+      {{episode.summary}}
+    </ion-card-content>
+
+  </ion-card>
+

@@ -1,12 +1,19 @@
+ion-content {
+  --background:#121c3b;
+}
+ion-back-button{
+  color: white;
+}
 swiper-container {
     width: 100%;
     height: 100%;
+    background:#121c3b;
   }
 
   swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #fff;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,6 +23,8 @@ swiper-container {
     height: 68%;
     width: 82%;
     margin-top: -5rem;
+    background-color: #2b175b;
+    color: #fff;
     ion-card-content {
       margin-top: 6rem;
    }
@@ -37,7 +46,7 @@ swiper-container {
 .word-selected{
 
   font-weight: bolder;
-  color: #000;
+  color: #fff;
 }
 
 .block {
@@ -65,10 +74,18 @@ ion-toolbar {
 ion-header {
   position: absolute;
 }
+ion-button{
+  color: #ffff;
+}
+
+.bg-color {
+  background-color: #030319 !important;
+  color: #fff !important;
+}
 
 swiper-container::part(button-prev) {
   border: 1px solid #ccc !important;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px !important;
+  box-shadow: rgba(176, 173, 173, 0.15) 1.95px 1.95px 2.6px !important;
   padding: 9px !important;
   border-radius: 53% !important;
   display: flex !important;
@@ -76,12 +93,12 @@ swiper-container::part(button-prev) {
   align-items: center !important;
   width: 40px;
   height: 40px;
-  color: #000;
+  color: #fff;
 }
 
 swiper-container::part(button-next) {
   border: 1px solid #ccc !important;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px !important;
+  box-shadow: rgba(176, 173, 173, 0.15) 1.95px 1.95px 2.6px !important;
   padding: 9px !important;
   border-radius: 53% !important;
   display: flex !important;
@@ -89,5 +106,5 @@ swiper-container::part(button-next) {
   align-items: center !important;
   width: 40px;
   height: 40px;
-  color: #000;
+  color: #fff;
 }
