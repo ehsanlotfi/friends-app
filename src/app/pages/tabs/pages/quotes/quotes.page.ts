@@ -20,12 +20,13 @@ export class QuotesPage implements OnInit {
   quotes: _mod.Quote[] = [];
   presentModel: any;
   private _quoteID: number;
-  existenceWord:boolean=false;
+  existenceWord: boolean = false;
+  public WordLightnerString = "";
   constructor(
     private globalService: GlobalService,
     private nav: NavController,
     private route: ActivatedRoute,
- private lightnerService:LightnerService
+    private lightnerService: LightnerService
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +34,9 @@ export class QuotesPage implements OnInit {
     this.episodeId = +this.route.snapshot.paramMap.get('episodeId')!;
     this.title = `فصل ${this.seasonId} قسمت ${this.episodeId}`;
     this.getData();
+    this.lightnerService.getListLightnerToString().then(res => {
+      this.WordLightnerString = res
+    });
   }
   getData() {
     this.globalService.getAllQuote(this.seasonId, this.episodeId).subscribe(data => {
@@ -61,22 +65,39 @@ export class QuotesPage implements OnInit {
       let target = e.target as HTMLElement;
       this.wordSelected = target.innerHTML
       this.modal.present();
-      this.existenceWord = this.lightnerService.WordLightner.some(f => f.en === this.wordSelected);
-     
+      this.existenceWord = this.lightnerService.WordLightner.some(f => f.en.toLocaleLowerCase() === this.wordSelected.toLocaleLowerCase());
+
     }
   }
   addWord(word) {
-      this.lightnerService.WordLightner.push({
-        en: word,
-        fa: 'مدنوم ولی نمگم',
-        IdQuote: this._quoteID,
-        seasonId: this.seasonId,
-      });
-      this.lightnerService.setLightner(this.lightnerService.WordLightner)
+    this.lightnerService.WordLightner.push({
+      en: word,
+      fa: 'مدنوم ولی نمگم',
+      IdQuote: this._quoteID,
+      seasonId: this.seasonId,
+    });
+    this.setLightner(word);
     this.modal.dismiss(word, 'confirm');
   }
+  removeWord(word) {
+    this.lightnerService.WordLightner = this.lightnerService.WordLightner.filter(f => f.en.toLocaleLowerCase() != word.toLocaleLowerCase());
+    const regex = new RegExp(word, 'gi');
+    this.WordLightnerString=this.WordLightnerString.replace(regex,'');
+    this.setLightner();
 
+  }
+  setLightner(word: string = "") {
+    this.lightnerService.setLightner(this.lightnerService.WordLightner).then(res => {
+      if (word != "") {
+        this.WordLightnerString += ' ' + word
 
+      }
+      this.modal.dismiss(word, 'confirm');
+    })
+  }
+  speechSynthesis(word: string) {
+    this.lightnerService.speechSynthesis(word);
+  }
   dismiss() {
     this.modal.dismiss(null, 'dismiss');
   }

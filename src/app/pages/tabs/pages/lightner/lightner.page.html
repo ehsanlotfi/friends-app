@@ -82,7 +82,7 @@
       <ion-list class="w-100">
         <ion-item>
           <ion-col size="6" class="ion-text-left">
-            <ion-label>
+            <ion-label  (click)="speechSynthesis(word.en)">
               {{word.en}}
               <ion-icon name="volume-high-sharp"></ion-icon>
             </ion-label>

@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import * as _partials from 'src/app/partials/index';
 import { HideHeaderDirective } from './directives/hide-header.directive';
 import { ParallaxDirective } from './directives/parallax.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { highlightPipe } from '../pipe/highlight.pipe';
 
 @NgModule({
   declarations: [
@@ -11,12 +13,15 @@ import { ParallaxDirective } from './directives/parallax.directive';
     _partials.layouts,
     _partials.EpisodListComponent,
     HideHeaderDirective,
-    ParallaxDirective
+    ParallaxDirective,
+    highlightPipe
   ],
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
+  
   ],
 
   providers: [
@@ -29,8 +34,11 @@ import { ParallaxDirective } from './directives/parallax.directive';
     _partials.HeaderComponent,
     _partials.layouts,
     _partials.EpisodListComponent,
+    highlightPipe,
     HideHeaderDirective,
-    ParallaxDirective
+    ParallaxDirective,
+    HttpClientModule
+
 
    
   ],

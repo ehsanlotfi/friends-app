@@ -108,3 +108,70 @@ swiper-container::part(button-next) {
   height: 40px;
   color: #fff;
 }
+
+
+
+.incorrect {
+  animation: incorrect .7s;
+}
+
+@keyframes incorrect {
+  0% {
+      transform: translateX(0);
+  }
+  15% {
+      color: red;
+      transform: translateX(3px);
+  }
+  25% {
+      color: red;
+      transform: translateX(-3px);
+  }
+  50% {
+      color: red;
+      transform: translateX(3px);
+  }
+  75% {
+    
+      color: red;
+      transform: translateX(-3px);
+  }
+  100% {
+      transform: translateX(0);
+  }
+}
+
+
+
+
+
+
+.successful {
+  animation: successful .7s;
+}
+
+@keyframes successful {
+  0% {
+      transform: translateX(0);
+  }
+  15% {
+      color: rgb(34, 194, 66);
+      transform: translateX(3px);
+  }
+  25% {
+      color: rgb(34, 194, 66);
+      transform: translateX(-3px);
+  }
+  50% {
+      color:rgb(34, 194, 66);
+      transform: translateX(3px);
+  }
+  75% {
+    
+      color: rgb(34, 194, 66);
+      transform: translateX(-3px);
+  }
+  100% {
+      transform: translateX(0);
+  }
+}

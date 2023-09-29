@@ -8,10 +8,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as _partials from 'src/app/partials/index';
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule,
-  
     FormsModule,
     ReactiveFormsModule,
     IonicModule.forRoot(), 
@@ -21,8 +21,14 @@ import * as _partials from 'src/app/partials/index';
     
   
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
-``
+export class AppModule {
+
+
+
+}
+

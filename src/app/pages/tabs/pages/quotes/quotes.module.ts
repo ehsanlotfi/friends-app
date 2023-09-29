@@ -8,6 +8,7 @@ import { QuotesPageRoutingModule } from './quotes-routing.module';
 
 import { QuotesPage } from './quotes.page';
 import { ShareModule } from 'src/app/shared/share.module';
+import { LightnerService } from 'src/app/services/lightner.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { ShareModule } from 'src/app/shared/share.module';
     QuotesPageRoutingModule,
     ShareModule.forChild()
   ],
-  declarations: [QuotesPage]
+  declarations: [QuotesPage],
+  providers:[LightnerService]
 })
 export class QuotesPageModule {}

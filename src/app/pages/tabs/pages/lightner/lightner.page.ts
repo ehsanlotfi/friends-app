@@ -17,6 +17,13 @@ this.lightnerService.getListLightner().then(list=>{
   this.listWord=list;
 });
 
-  }
+this.lightnerService.submitInformationFlight(null).subscribe(res=>{
 
+  console.log(res)
+})
+
+  }
+  speechSynthesis(word: string) {
+    this.lightnerService.speechSynthesis(word);
+   }
 }
