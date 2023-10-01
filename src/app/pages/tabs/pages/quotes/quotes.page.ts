@@ -4,6 +4,7 @@ import { IonModal, ModalController, NavController } from '@ionic/angular';
 import * as _mod from 'src/app/models';
 import { GlobalService } from 'src/app/services/global.service';
 import { LightnerService } from 'src/app/services/lightner.service';
+import { PresentLoadingService } from 'src/app/services/present-loading.service';
 
 @Component({
   selector: 'app-quotes',
@@ -12,21 +13,27 @@ import { LightnerService } from 'src/app/services/lightner.service';
 })
 export class QuotesPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
+
   seasonId: number;
   episodeId: number;
   wordSelected: string;
+  translateWord: string;
   title: string = "";
   segId: string = "en"
   quotes: _mod.Quote[] = [];
   presentModel: any;
   private _quoteID: number;
-  existenceWord: boolean = false;
+  existenceWord: _mod.Lightner;
+  loadingtranslate: boolean = false;
+  quoteSelect: _mod.Quote;
   public WordLightnerString = "";
+
   constructor(
     private globalService: GlobalService,
     private nav: NavController,
     private route: ActivatedRoute,
-    private lightnerService: LightnerService
+    private lightnerService: LightnerService,
+    private presentLoadingService: PresentLoadingService
   ) { }
 
   ngOnInit(): void {
@@ -41,9 +48,10 @@ export class QuotesPage implements OnInit {
   getData() {
     this.globalService.getAllQuote(this.seasonId, this.episodeId).subscribe(data => {
       this.quotes = data.map(f => {
-        f.Content = f.Content.split(' ').map(t => {
-          return '<span>' + t + '</span>'
-        }).join(' ')
+        f.clienWord = f.Content,
+          f.Content = f.Content.split(' ').map(t => {
+            return '<span>' + t + '</span>'
+          }).join(' ')
         return f;
       });
     });
@@ -59,30 +67,41 @@ export class QuotesPage implements OnInit {
     this.nav.navigateBack(['/app', this.seasonId]);
   }
 
-  clickSpan(input, e: MouseEvent, quoteID) {
-    this._quoteID = quoteID;
+  clickSpan(input, e: MouseEvent, quote) {
+    this.quoteSelect = quote;
+    this.translateWord = "";
+    this.wordSelected = "";
+    this._quoteID = quote.ID;
     if ((e.target as HTMLElement).tagName === 'SPAN') {
       let target = e.target as HTMLElement;
       this.wordSelected = target.innerHTML
       this.modal.present();
-      this.existenceWord = this.lightnerService.WordLightner.some(f => f.en.toLocaleLowerCase() === this.wordSelected.toLocaleLowerCase());
-
+      this.existenceWord = this.lightnerService.WordLightner.find(f => f.en.toLocaleLowerCase() === this.wordSelected.toLocaleLowerCase());
+      if (!this.existenceWord) {
+        this.translateApi();
+      }
+      else {
+        this.translateWord = this.existenceWord.fa
+      }
     }
   }
   addWord(word) {
+
     this.lightnerService.WordLightner.push({
       en: word,
-      fa: 'مدنوم ولی نمگم',
+      fa: this.translateWord,
       IdQuote: this._quoteID,
       seasonId: this.seasonId,
+      content: this.quoteSelect.Content,
     });
     this.setLightner(word);
     this.modal.dismiss(word, 'confirm');
+
   }
   removeWord(word) {
     this.lightnerService.WordLightner = this.lightnerService.WordLightner.filter(f => f.en.toLocaleLowerCase() != word.toLocaleLowerCase());
     const regex = new RegExp(word, 'gi');
-    this.WordLightnerString=this.WordLightnerString.replace(regex,'');
+    this.WordLightnerString = this.WordLightnerString.replace(regex, '');
     this.setLightner();
 
   }
@@ -100,5 +119,22 @@ export class QuotesPage implements OnInit {
   }
   dismiss() {
     this.modal.dismiss(null, 'dismiss');
+  }
+
+  segmentChanged(ev: any) {
+    this.segId = ev.detail.value;
+
+  }
+  translateApi() {
+
+    this.loadingtranslate = true;
+    this.lightnerService.translateApi(this.wordSelected).subscribe(res => {
+      if (res) {
+        this.translateWord = res;
+      }
+      else {
+        this.presentLoadingService.errorLoading('خطا در دریافت اطلاعات')
+      }
+    });
   }
 }

@@ -4,7 +4,7 @@ import { IntroGuard } from './guards/intro.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'app/seassons',
+    redirectTo: 'app/home',
     pathMatch: 'full'
   },
   {

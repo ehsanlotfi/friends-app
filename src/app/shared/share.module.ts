@@ -6,6 +6,8 @@ import { HideHeaderDirective } from './directives/hide-header.directive';
 import { ParallaxDirective } from './directives/parallax.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { highlightPipe } from '../pipe/highlight.pipe';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { register } from 'swiper/element/bundle';
 
 @NgModule({
   declarations: [
@@ -20,8 +22,8 @@ import { highlightPipe } from '../pipe/highlight.pipe';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
-  
+    HttpClientModule,
+    NgCircleProgressModule.forRoot()
   ],
 
   providers: [
@@ -37,7 +39,8 @@ import { highlightPipe } from '../pipe/highlight.pipe';
     highlightPipe,
     HideHeaderDirective,
     ParallaxDirective,
-    HttpClientModule
+    HttpClientModule,
+    NgCircleProgressModule
 
 
    
@@ -45,7 +48,9 @@ import { highlightPipe } from '../pipe/highlight.pipe';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ShareModule {
-
+ constructor(){
+  register();
+ }
   static forRoot() {
     return {
       ngModule: ShareModule,
@@ -57,5 +62,7 @@ export class ShareModule {
       ngModule: ShareModule,
     }
   }
+
+
 
 }

@@ -4,14 +4,14 @@ import { Lightner } from './fake-data';
 import { Preferences } from '@capacitor/preferences';
 import { HttpClient } from '@angular/common/http';
 import { TextToSpeech } from '@capacitor-community/text-to-speech';
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class LightnerService {
   public WordLightner = [];
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+
+  ) {
     this.getListLightner().then(list => {
       if (list) {
         this.WordLightner = list
@@ -40,22 +40,16 @@ export class LightnerService {
   }
   async getListLightnerToString(): Promise<string> {
     const ret = await Preferences.get({ key: 'lightner' });
-    return JSON.parse(ret.value).map(f => f.en).join(' ')
+    if(ret.value!=null){
+      return JSON.parse(ret.value).map(f => f.en).join(' ')
+    }
+    else
+    {
+      return "";
+    }
   }
-  async translateGoogle(word: string) {
-
-    //   translate(word, {from: 'en', to: 'fa'}).then(res => {
-    //     console.log(res.text);
-    //     //=> Ik spreek Nederlands!
-    //     console.log(res.from.text.autoCorrected);
-    //     //=> true
-    //     console.log(res.from.text.value);
-    //     //=> I [speak] Dutch!
-    //     console.log(res.from.text.didYouMean);
-    //     //=> false
-    // }).catch(err => {
-    //     console.error(err);
-    // });
+   translateApi(word: string) {
+    return this.http.get<any>(`https://localhost:7256/api/${word}`)
 
   }
 

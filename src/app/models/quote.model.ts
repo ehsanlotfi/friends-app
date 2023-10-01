@@ -15,7 +15,8 @@ export interface Quote
     Type: QuoteType,
     DateSeen: number,
     CntSeen: number,
-    showTrans?: boolean
+    showTrans?: boolean,
+    clienWord?:string,
 }
 
 export interface Lightner{
@@ -23,4 +24,6 @@ export interface Lightner{
     seasonId: number;
     fa:string;
     en:string;
+    Content:string,
+    Node?:string,
 }

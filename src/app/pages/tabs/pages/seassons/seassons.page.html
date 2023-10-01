@@ -1,4 +1,16 @@
-<app-header title="سریال فرندز" [color]="'light'"></app-header>
+
+<ion-header >
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button fill="solid" shape="round" color="light" routerLink="/app/home">
+        <ion-icon slot="icon-only" name="arrow-back" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+     سریال فرندز
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <ion-card class="ion-margin ion-padding ion-text-right" *ngFor="let season of seasons"
 

@@ -2,9 +2,8 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { SpeechRecognition } from '@capacitor-community/speech-recognition';
 import { IonModal, ModalController } from '@ionic/angular';
 import { LightnerService } from 'src/app/services/lightner.service';
-import { register } from 'swiper/element/bundle';
 import { Navigation } from 'swiper/modules';
-register();
+
 @Component({
   selector: 'app-review',
   templateUrl: './review.page.html',
@@ -14,6 +13,7 @@ export class ReviewPage implements OnInit, OnDestroy {
   wordSelected = "Hello";
   swiperEl: any;
   @ViewChild(IonModal) modal: IonModal;
+  @ViewChild(IonModal) modalNode: IonModal;
   listWord = [];
   activeRow: any;
   initialBreakpoint = 0.25;
@@ -22,11 +22,14 @@ export class ReviewPage implements OnInit, OnDestroy {
   invalidRecognition: boolean = false;
   validRecognition: boolean = false;
   isAvailable: boolean = false;
-  Speek:any;
+  isNewNode: boolean = false;
+  node: string = ""
+  Speek: any;
+  segId: string = "translate"
   constructor(private lightnerService: LightnerService,
-    private modalCtrl: ModalController
-  ) {
+    private modalCtrl: ModalController,
 
+  ) {
   }
   ngOnInit() {
     this.lightnerService.getListLightner().then(list => {
@@ -34,9 +37,10 @@ export class ReviewPage implements OnInit, OnDestroy {
       this.activeRow = this.listWord[0];
       this.initialize()
     });
-
     this.initRecognition();
   }
+
+
   async initRecognition() {
     const { available } = await SpeechRecognition.available();
     if (available) {
@@ -47,18 +51,26 @@ export class ReviewPage implements OnInit, OnDestroy {
   dismiss() {
     this.modal.dismiss(null, 'dismiss');
   }
-  openModal() {
+  openModal(type: string) {
+    this.modal.dismiss();
     this.initialBreakpoint = 1;
-    this.backdropBreakpoint = 1;
-    this.modal.present();
+    setTimeout(() => {
+      this.segId = type;
+      this.modal.present();
+    }, 10)
+  }
+  NewNode() {
+    this.isNewNode = true;
+
   }
   remember() {
     this.swiperEl.swiper.slideNext();
   }
   initialize() {
+    console.log('init review')
     setTimeout(() => {
       // swiper element
-      this.swiperEl = document.querySelector('swiper-container') as any;
+      this.swiperEl = document.getElementById('swiper_review') as any;
 
       // swiper parameters
       const swiperParams = {
@@ -100,8 +112,8 @@ export class ReviewPage implements OnInit, OnDestroy {
   async startRecognition(word) {
     this.recording = true;
     this.invalidRecognition = false;
-    this.validRecognition=false;
-    this.Speek="";
+    this.validRecognition = false;
+    this.Speek = "";
     const { available } = await SpeechRecognition.available();
     if (available) {
       SpeechRecognition.start({
@@ -113,14 +125,14 @@ export class ReviewPage implements OnInit, OnDestroy {
       });
       SpeechRecognition.addListener("partialResults", (data: any) => {
         if (data.matches && data.matches.length > 0) {
-          this.Speek=data.matches[0].toLocaleLowerCase();
-          if (word.toLocaleLowerCase()  != data.matches[0].toLocaleLowerCase()) {
+          this.Speek = data.matches[0].toLocaleLowerCase();
+          if (word.toLocaleLowerCase() != data.matches[0].toLocaleLowerCase()) {
             this.invalidRecognition = true;
-            this.validRecognition=false;
+            this.validRecognition = false;
           }
           else {
             this.invalidRecognition = false;
-            this.validRecognition=true;
+            this.validRecognition = true;
           }
         }
       });
@@ -133,5 +145,18 @@ export class ReviewPage implements OnInit, OnDestroy {
     await SpeechRecognition.stop();
   }
 
+  segmentChanged(ev: any) {
+    this.segId = ev.detail.value;
 
+  }
+
+  insertNode() {
+    this.activeRow.Node = this.node;
+    this.isNewNode = false;
+
+  }
+  editNode() {
+    this.isNewNode = true;
+    this.node = this.activeRow.Node;
+  }
 }

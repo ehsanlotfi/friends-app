@@ -1,35 +1,37 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar >
-    <ion-buttons >
-      <ion-back-button defaultHref="/lightner"></ion-back-button>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="app/lightner"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <swiper-container class="mySwiper" init="false">
+  <swiper-container id="swiper_review" class="mySwiper" init="false">
     <swiper-slide *ngFor="let word of listWord">
       <ion-card>
         <ion-card-header>
+        
           <ion-row class="ion-margin ion-padding row-word">
             <ion-col size="12">
-              <h3 class="word-selected" [class.incorrect]="invalidRecognition" [class.successful]="validRecognition">{{word.en}}</h3>
+              <h3 class="word-selected" [class.incorrect]="invalidRecognition" [class.successful]="validRecognition">
+                {{word.en}}</h3>
               <h3 class="word-selected" *ngIf="Speek">شما گفتی :{{Speek}}</h3>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col size="12">
-              <!----(click)="speechSynthesis(activeRow.en)"-->
-              <ion-button color="danger"   (click)="speechSynthesis(activeRow.en)">
-                <ion-icon slot="start" name="volume-high-sharp" ></ion-icon>
+              <!----(click)="speechSynthesis(activeRow?.en)"-->
+              <ion-button color="danger" (click)="speechSynthesis(activeRow?.en)">
+                <ion-icon slot="start" name="volume-high-sharp"></ion-icon>
                 Uk
               </ion-button>
-              <ion-button class="primary" (click)="speechSynthesis(activeRow.en)">
+              <ion-button class="primary" (click)="speechSynthesis(activeRow?.en)">
                 Us
                 <ion-icon slot="end" name="volume-high-sharp"></ion-icon>
               </ion-button>
               <ng-container *ngIf="isAvailable">
-                <ion-button class="primary" *ngIf="!recording" (click)="startRecognition(activeRow.en)">
-                  
+                <ion-button class="primary" *ngIf="!recording" (click)="startRecognition(activeRow?.en)">
+
                   <ion-icon name="mic-outline"></ion-icon>
                 </ion-button>
                 <ion-button class="danger" *ngIf="recording" (click)="stopRecognition()">
@@ -45,10 +47,10 @@
         <ion-card-content class="ion-margin">
           <ion-row class="row-btn">
             <ion-col size="12">
-              <ion-button expand="block" shape="round" fill="outline" (click)="openModal()">نشان دادن مثال</ion-button>
+              <ion-button expand="block" shape="round" fill="outline" (click)="openModal('example')">نشان دادن مثال</ion-button>
             </ion-col>
             <ion-col size="12">
-              <ion-button expand="block" shape="round" color="medium" (click)="openModal()">نشان دادن معنی</ion-button>
+              <ion-button expand="block" shape="round" color="medium" (click)="openModal('translate')">نشان دادن معنی</ion-button>
             </ion-col>
           </ion-row>
         </ion-card-content>
@@ -58,32 +60,101 @@
   </swiper-container>
 
 
-  <ion-modal #modal [isOpen]="true" [initialBreakpoint]="initialBreakpoint" [breakpoints]="[0, 0.25, 0.5, 0.75,1]"
-  [backdropBreakpoint]="backdropBreakpoint"
-  handleBehavior="cycle"
-    [backdropDismiss]="false" >
+  <ion-modal #modal [isOpen]="true" [initialBreakpoint]="initialBreakpoint" [breakpoints]="[0.25,0.5,0.75,1]"
+    [backdropBreakpoint]="backdropBreakpoint" handleBehavior="cycle" [backdropDismiss]="false">
     <ng-template>
+
       <div class="bg-color">
-      <ion-row class="ion-padding">
-        <ion-col size="6" class="ion-text-center">
-          <ion-button expand="block" color="danger">یادم نیست</ion-button>
-        </ion-col>
-        <ion-col size="6">
-        <ion-button expand="block" color="success" (click)="remember()">یادم هست </ion-button>
+        <ion-row class="ion-padding row-word">
+          <ion-col size="11" class="word-selected"> {{activeRow?.en}}</ion-col>
+          <ion-col size="1" class="ion-text-right">
+            <ion-icon name="volume-high-sharp" class="icon-volume" (click)="speechSynthesis(activeRow?.en)"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <ion-row class="mb-4">
+          <ion-col size="6" class="ion-text-center">
+            <ion-button expand="block" color="danger">یادم نیست</ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button expand="block" color="success" (click)="remember()">یادم هست </ion-button>
 
-        </ion-col>
+          </ion-col>
 
-      </ion-row>
-      <ion-row class="ion-margin ion-padding row-word">
-        <ion-col size="11" class="word-selected">  {{activeRow.en}}</ion-col>
-        <ion-col size="1" class="ion-text-right">
-          <ion-icon name="volume-high-sharp" (click)="speechSynthesis(activeRow.en)"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <div class="block">
-     {{activeRow.en}}
-    </div>
+        </ion-row>
+        <ion-segment [value]="segId" (ionChange)="segmentChanged($event)">
+          <ion-segment-button value="note">
+            <ion-label>یادداشت</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="example">
+            <ion-label>مثال</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="dictionary">
+            <ion-label>دیکشنری</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="translate">
+            <ion-label>معنی</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+        <ng-container [ngSwitch]="segId">
+
+          <div class="ion-margin ion-text-right" *ngSwitchCase="'translate'">
+            {{activeRow?.fa}}
+          </div>
+          <div class="ion-margin ion-text-left" *ngSwitchCase="'example'">
+            <p [innerHTML]="activeRow?.content | highlight: activeRow?.en"></p>
+          </div>
+          <div class="ion-margin ion-text-left" *ngSwitchCase="'dictionary'">
+            {{activeRow?.en}}
+          </div>
+          <div class="ion-margin ion-text-right" *ngSwitchCase="'note'">
+            <div class="emty" *ngIf="!isNewNode">
+              <div class="isValue" *ngIf="!activeRow?.Node;else valueNode">
+                <ion-row class="node-row">
+                  <ion-col size="12" class="ion-text-center">
+                    <ion-icon size="larg" name="reader-outline"></ion-icon>
+                  </ion-col>
+                  <h3>یادداشتی برای این کلمه اضافه نکردید!</h3>
+                  <p>
+                    از طریق دکمه زیر، می‌توانید یادداشتی مرتبط با کلمه
+                    {{activeRow?.en}} اضافه کنید. یادداشت‌های افزوده شده،
+                    فقط به خودتان نمایش داده خواهد شد.
+                  </p>
+                </ion-row>
+                <ion-button expand="full" shape="round" color="primary" (click)="NewNode()">
+                  افزودن یادداشت جدید
+                </ion-button>
+              </div>
+              <ng-template #valueNode>
+               
+                  <ion-item  class="ion-margin item-node"> 
+                    {{activeRow?.Node}}
+                  </ion-item>
+               
+                <ion-button expand="full" shape="round" color="primary" (click)="editNode()">
+                  ویرایش یادداشت 
+                </ion-button>
+              </ng-template>
+            </div>
+
+            <div class="insertNode" *ngIf="isNewNode">
+              <h3>یادداشت برای {{activeRow?.en}}</h3>
+              <ion-textarea [autofocus]="true" [(ngModel)]="node">
+              </ion-textarea>
+              <div class="holder-btn ion-margin">
+                <ion-button color="primary" expand="small" [disabled]="(node=='')" (click)="insertNode()">ذخیره</ion-button>
+                <ion-button color="danger" expand="small" (click)="isNewNode=false">لغو</ion-button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
       </div>
     </ng-template>
   </ion-modal>
+
+
+
+
+
+
 </ion-content>

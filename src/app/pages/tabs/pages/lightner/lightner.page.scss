@@ -1,5 +1,5 @@
 ion-content {
-    --background:#121c3b;
+    --background: #121c3b;
 }
 
 ion-list {
@@ -43,12 +43,14 @@ ion-list {
     background-color: #2b175b;
     height: auto;
     margin-bottom: 13px;
-    .lower-box{
+
+    .lower-box {
         padding: 20px;
         margin-top: 10px;
         display: flex;
         overflow-x: auto;
         overflow-y: hidden;
+
         .item {
             border: 1px solid #ccc;
             border-radius: 12px;
@@ -62,7 +64,68 @@ ion-list {
         }
     }
 
-    .lbl-txt{
-        font-size: 12px;;
+    .lbl-txt {
+        font-size: 12px;
+        ;
     }
+}
+
+.holder {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.checkmark {
+    font-size: 22px;
+    color: #06ae2b !important;
+    --color: #06ae2b !important;
+}
+
+.boxIcon {
+    margin-right: 0;
+    margin-left: 0;
+    float: right;
+    margin-right: 4px;
+
+    .word-strength {
+        width: 20px;
+        height: 20px;
+        direction: rtl;
+        display: grid;
+        display: -ms-grid;
+        align-items: end;
+        justify-content: end;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: 2px;
+        -ms-z-grid-columns: 1fr 2px 1fr 2px 1fr;
+
+        .long-memory {
+            background-color: rgb(0, 170, 70) !important;
+        }
+
+        .need-to-review {
+            background-color: rgb(229, 57, 53) !important;
+        }
+
+        .short-memory {
+            background-color: rgb(248, 116, 0) !important;
+        }
+
+        .first-column {
+            height: 100%;
+            background-color: rgb(243, 243, 243);
+        }
+
+        .second-column {
+            height: 60%;
+            background-color: rgb(243, 243, 243);
+        }
+
+        .third-column {
+            height: 33%;
+            background-color: rgb(243, 243, 243);
+        }
+    }
+
 }

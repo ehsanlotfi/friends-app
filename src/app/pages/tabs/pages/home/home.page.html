@@ -1,27 +1,100 @@
 <ion-header class="ion-no-border" [translucent]="true">
-  <ion-toolbar mode="md">
-    <ion-buttons slot="start">
-      <ion-back-button color="light" defaultHref="search-chef"></ion-back-button>
-    </ion-buttons>
+  <ion-toolbar>
     <ion-icon slot="end" name="log-out-outline"></ion-icon>
+    <ion-label class="ion-margin" slot="start">2</ion-label>
+    <ion-icon slot="start" class="start-icon" name="star-sharp">
+      
+    </ion-icon>
   </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
-  <div id="container">
-    <strong>What's up, Joy!</strong>
-    <span class="sub-header">categories</span>
+<ion-content>
+  <div class="ch-menu">
+    <p>سریال های انتخاب شده</p>
+    <div class="wrapper">
+      <div class="card-series" [routerLink]="['/app/seassons']">
+        <img src="assets/img/5.jpg" />
+        <img src="assets/img/5.jpg" />
+        <img src="assets/img/5.jpg" />
+      </div>
+      <div class="card-series">
+        <img src="assets/img/1.jpg" />
+        <img src="assets/img/1.jpg" />
+        <img src="assets/img/1.jpg" />
+      </div>
 
-    <span class="todays-header">TODAY'S Very Good</span>
+      <div class="card-series">
+        <img src="assets/img/2.jpg" />
+        <img src="assets/img/2.jpg" />
+        <img src="assets/img/2.jpg" />
+      </div>
 
+      <div class="card-series">
+        <img src="assets/img/3.jpg" />
+        <img src="assets/img/3.jpg" />
+        <img src="assets/img/3.jpg" />
+      </div>
+
+      <div class="card-series">
+        <img src="assets/img/4.jpg" />
+        <img src="assets/img/4.jpg" />
+        <img src="assets/img/4.jpg" />
+      </div>
+
+      <div class="card-series">
+        <ion-button expand="full" shape="round"  [routerLink]="['/app/select-user']">
+          افزودن درس
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
   </div>
 
-  <ion-fab id="trigger-button" vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button mode="ios">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  <ion-modal mode="ios" trigger="trigger-button" [isOpen]="false" [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="1">
-    <ng-template>
-    </ng-template>
-  </ion-modal>
+  <ion-card>
+    <ion-card-header>
+      <ion-label>وضعیت یادگیری من</ion-label>
+    </ion-card-header>
+
+    <ion-card-content class="ion-no-padding">
+      <ion-row>
+        <ion-col size="8" class="holder-prog">
+          <div class="knowledge-level">
+
+            <circle-progress [percent]="85" [radius]="100" [responsive]="true" [showBackground]="false"
+              [outerStrokeWidth]="3" [space]="2" [innerStrokeWidth]="1" [outerStrokeColor]="'#78C000'"
+              [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300" [showImage]="true"
+              [showTitle]="false" [showUnits]="false" [showSubtitle]="false" [imageHeight]="100" [imageWidth]="50"
+              [imageSrc]="'/assets/img/knowledge_level_avatar_2.png'"></circle-progress>
+
+          </div>
+        </ion-col>
+        <ion-col size="4">
+          <div class="lavel">
+            <h3>سطح 2</h3>
+            <ion-label>500 لغت تا مرحله بعد</ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card>
+    <ion-card-content class="ion-no-padding">
+      <div class="dayOfweek ion-padding">
+
+
+        <div class="day-card" *ngFor="let item of ['ش','ی','د','س','چ','پ','ج']">
+          <circle-progress [percent]="85" [radius]="100"  
+          [outerStrokeWidth]="5" [responsive]="true" [space]="2" [outerStrokeColor]="'#d4d709'"
+          [animation]="true" [showInnerStroke]="false" [animationDuration]="300" [showImage]="false"
+          [showTitle]="false" [showUnits]="false" [showSubtitle]="false"></circle-progress>
+
+          <ion-label class="ion-text-center">{{item}}</ion-label>
+        </div>
+
+      </div>
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>

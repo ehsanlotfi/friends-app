@@ -16,5 +16,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
   }
-
+  goToSearch(){
+    this.nav.navigateForward('app/search')
+  }
 }

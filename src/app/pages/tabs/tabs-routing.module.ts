@@ -36,8 +36,18 @@ const routes: Routes = [
         path: 'lightner',
         loadChildren: () => import('./pages/lightner/lightner.module').then( m => m.LightnerPageModule)
       },
+      {
+        path: 'search',
+        loadChildren: () => import('./pages/search/search.module').then( m => m.SearchPageModule)
+      },
+      {
+        path: 'select-user',
+        loadChildren: () => import('./pages/select-user/select-user.module').then( m => m.SelectUserPageModule)
+      },
     ],
   },
+
+ 
  
 
   
