@@ -73,9 +73,9 @@ export class LightnerService {
     await TextToSpeech.speak({
       text: word,
       lang: 'en-US',
-      rate: 1.0,
+      rate: 0.6,
       pitch: 1.0,
-      volume: 1.0,
+      volume: 9.0,
       category: 'ambient',
     });
   }

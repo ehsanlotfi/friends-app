@@ -93,6 +93,7 @@ export class QuotesPage implements OnInit {
       IdQuote: this._quoteID,
       seasonId: this.seasonId,
       content: this.quoteSelect.Content,
+      CleanText:this.quoteSelect.clienWord
     });
     this.setLightner(word);
     this.modal.dismiss(word, 'confirm');

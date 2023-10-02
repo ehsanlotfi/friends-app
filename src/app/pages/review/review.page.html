@@ -10,12 +10,16 @@
     <swiper-slide *ngFor="let word of listWord">
       <ion-card>
         <ion-card-header>
-        
+          <div class="holder-star">
+            <ion-icon [name]="word.starTranslate?'star':'star-outline' " [class.icon-gold]="word.starTranslate" [class.incorrect]="word.starTranslate==false"></ion-icon>
+            <ion-icon [name]="word.startSound?'star':'star-outline' " [class.icon-gold]="word.startSound" [class.incorrect]="word.startSound==false"></ion-icon>
+            <ion-icon [name]="word.starWriting?'star':'star-outline' " [class.icon-gold]="word.starWriting" [class.incorrect]="word.starWriting==false"></ion-icon>
+          </div>
           <ion-row class="ion-margin ion-padding row-word">
             <ion-col size="12">
               <h3 class="word-selected" [class.incorrect]="invalidRecognition" [class.successful]="validRecognition">
                 {{word.en}}</h3>
-              <h3 class="word-selected" *ngIf="Speek">شما گفتی :{{Speek}}</h3>
+              <h6 class="word-selected" *ngIf="Speek">شما گفتی :{{Speek}}</h6>
             </ion-col>
           </ion-row>
           <ion-row>
@@ -40,27 +44,64 @@
               </ng-container>
             </ion-col>
           </ion-row>
-
+          <div class="holder-test ion-margin">
+            <ion-icon name="star" class="icon-gold"></ion-icon>
+            <ion-label>ترجمه :</ion-label>
+            <ion-input type="text" placeholder="ترجمه" name="translate"
+              (change)="changeInputTest($event,word)"></ion-input>
+            <ion-icon name="checkmark" class="icon-gold" *ngIf="word.starTranslate"></ion-icon>
+            <ion-icon name="close" *ngIf="!word.starTranslate"></ion-icon>
+          </div>
 
         </ion-card-header>
 
-        <ion-card-content class="ion-margin">
+        <ion-card-content>
           <ion-row class="row-btn">
             <ion-col size="12">
-              <ion-button expand="block" shape="round" fill="outline" (click)="openModal('example')">نشان دادن مثال</ion-button>
+              <ion-button expand="block" shape="round" fill="outline" (click)="openModal('example')">نشان دادن
+                مثال</ion-button>
             </ion-col>
             <ion-col size="12">
-              <ion-button expand="block" shape="round" color="medium" (click)="openModal('translate')">نشان دادن معنی</ion-button>
+              <ion-button expand="block" shape="round" color="medium" (click)="openModal('translate')">نشان دادن
+                معنی</ion-button>
             </ion-col>
           </ion-row>
         </ion-card-content>
+
+        <p [innerText]="activeRow.wordSelectUser?activeRow.wordSelectUser:''"></p>
+        <div class="wrapper">
+          <div class="ion-activatable ripple-parent circle">
+            <!-- <ng-container *ngIf="isAvailable"> -->
+              <ion-button *ngIf="!recording" (click)="startRecognition(activeRow?.en)">
+
+                <ion-icon class="mic-outline" name="mic-outline"></ion-icon>
+              </ion-button>
+              <ion-button  *ngIf="recording" (click)="stopRecognition()">
+                <ion-icon class="mic-off-outline" name="mic-off-outline"></ion-icon>
+              </ion-button>
+            <!-- </ng-container> -->
+            <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+          </div>
+        </div>
       </ion-card>
+
+
+
     </swiper-slide>
 
   </swiper-container>
+  <div class="holder-btn-test" (click)="onButtonWordsClick($event)">
+    <ion-button fill="outline" shape="round" *ngFor="let item of wordSelectUserData" color="primary">{{item}}</ion-button>
+    <ion-icon name="trash-outline" (click)="clearClassBtn()"></ion-icon>
+  </div>
 
+  <div class="volume">
+    <ion-icon name="volume-high-sharp" class="icon-volume"
+      (click)="speechTestCleanText(activeRow?.CleanText)"></ion-icon>
 
-  <ion-modal #modal [isOpen]="true" [initialBreakpoint]="initialBreakpoint" [breakpoints]="[0.25,0.5,0.75,1]"
+  </div>
+
+  <ion-modal #modal [isOpen]="true" [initialBreakpoint]="initialBreakpoint" [breakpoints]="[0,0.25,0.5,0.75,1]"
     [backdropBreakpoint]="backdropBreakpoint" handleBehavior="cycle" [backdropDismiss]="false">
     <ng-template>
 
@@ -125,13 +166,13 @@
                 </ion-button>
               </div>
               <ng-template #valueNode>
-               
-                  <ion-item  class="ion-margin item-node"> 
-                    {{activeRow?.Node}}
-                  </ion-item>
-               
+
+                <ion-item class="ion-margin item-node">
+                  {{activeRow?.Node}}
+                </ion-item>
+
                 <ion-button expand="full" shape="round" color="primary" (click)="editNode()">
-                  ویرایش یادداشت 
+                  ویرایش یادداشت
                 </ion-button>
               </ng-template>
             </div>
@@ -141,7 +182,8 @@
               <ion-textarea [autofocus]="true" [(ngModel)]="node">
               </ion-textarea>
               <div class="holder-btn ion-margin">
-                <ion-button color="primary" expand="small" [disabled]="(node=='')" (click)="insertNode()">ذخیره</ion-button>
+                <ion-button color="primary" expand="small" [disabled]="(node=='')"
+                  (click)="insertNode()">ذخیره</ion-button>
                 <ion-button color="danger" expand="small" (click)="isNewNode=false">لغو</ion-button>
               </div>
             </div>
@@ -151,10 +193,4 @@
       </div>
     </ng-template>
   </ion-modal>
-
-
-
-
-
-
 </ion-content>

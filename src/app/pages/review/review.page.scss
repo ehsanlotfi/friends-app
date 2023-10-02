@@ -4,15 +4,20 @@ ion-content {
 ion-back-button{
   color: white;
 }
+ion-button {
+  text-transform: none !important;
+ }
 .icon-volume{
   font-size: 20px;
 }
 swiper-container {
-    width: 100%;
-    height: 100%;
-    background:#121c3b;
+  width: 100%;
+  background: #121c3b;
+  margin-top: 1rem;
   }
-
+  .icon-gold{
+    color: gold !important;
+  }
   swiper-slide {
     text-align: center;
     font-size: 18px;
@@ -23,14 +28,48 @@ swiper-container {
    
 
  ion-card{
-  height: 38rem;
+  height: 34rem;
   width: 22rem;
-  margin-top: -5rem;
   background-color: #2b175b;
   color: #fff;
   border-radius: 20px;
+  .holder-star{
+    display: grid;
+    grid-template-columns: 10% 10% 10%;
+    grid-template-rows: 29px;
+    direction: rtl;
+    justify-content: center;
+    align-items: center;
+   
+    ion-icon{
+      width: 30px;
+      font-size: 25px;
+    }
+  }
+
+  .holder-test{
+    display: grid;
+    grid-template-columns: 8% 17% 65% 10%;
+    grid-template-rows: 51px;
+    direction: rtl;
+    justify-content: center;
+    align-items: center;
+    ion-label{
+      color: #fff;
+    }
+    ion-input{
+    border: 1px solid #ccc;
+    border-radius: 18px;
+    color: #fff;
+    direction: rtl;
+    }
+    ion-icon{
+      width: 30px;
+      font-size: 18px;
+    }
+  }
     ion-card-content {
-      margin-top: 6rem;
+      margin-top: 3rem;
    }
     }
 
@@ -139,6 +178,45 @@ ion-segment-button.md {
 
   }
 }
+
+
+.holder-btn-test{
+  padding: 9px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 128;
+  line-height: 54px;
+  display: table;
+  ion-icon{
+    font-size: 24px;
+    color: red;
+    margin-left: 5px;
+  }
+  ion-button{
+  font-size: 9px;
+}
+}
+.volume{
+  border: 1px solid #ccc !important;
+  box-shadow: rgba(176, 173, 173, 0.15) 1.95px 1.95px 2.6px !important;
+  padding: 9px !important;
+  border-radius: 53% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 62px;
+  height: 62px;
+  color: #fff;
+  background: #2b175b;
+  z-index: 128;
+  position: absolute;
+  bottom: 1rem;
+  right: 10rem;
+  ion-icon.icon-volume{
+font-size: 30px;
+  }
+}
+
 swiper-container::part(button-prev) {
   border: 1px solid #ccc !important;
   box-shadow: rgba(176, 173, 173, 0.15) 1.95px 1.95px 2.6px !important;
@@ -164,6 +242,54 @@ swiper-container::part(button-next) {
   height: 40px;
   color: #fff;
 }
+
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  height: 76px;
+  margin: 0 auto;
+  position: absolute;
+  left: 9rem;
+  bottom: -1rem;
+}
+.ripple-parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #2f022e;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.circle {
+  width: 85px;
+  height: 85px;
+  background-color: #121c3b;
+  border-radius: 50%;
+  box-shadow: 1px -3px 28px 6px #121c3b;
+  ion-button{
+    height: 100%;
+    width: 100%;
+    background-color: transparent !important;
+    --background: transparent !important;
+    .mic-outline{
+      color: #5598ff !important;
+    }
+    .mic-off-outline{
+      color:green !important;
+    }
+    ion-icon{
+      font-size: 27px !important;
+    }
+
+  }
+}
+
 
 
 
@@ -231,3 +357,5 @@ swiper-container::part(button-next) {
       transform: translateX(0);
   }
 }
+
+

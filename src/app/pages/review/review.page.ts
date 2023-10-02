@@ -3,7 +3,7 @@ import { SpeechRecognition } from '@capacitor-community/speech-recognition';
 import { IonModal, ModalController } from '@ionic/angular';
 import { LightnerService } from 'src/app/services/lightner.service';
 import { Navigation } from 'swiper/modules';
-
+import * as _mod from 'src/app/models';
 @Component({
   selector: 'app-review',
   templateUrl: './review.page.html',
@@ -15,8 +15,9 @@ export class ReviewPage implements OnInit, OnDestroy {
   @ViewChild(IonModal) modal: IonModal;
   @ViewChild(IonModal) modalNode: IonModal;
   listWord = [];
+  wordSelectUserData = [];
   activeRow: any;
-  initialBreakpoint = 0.25;
+  initialBreakpoint = 0;
   backdropBreakpoint = 0.25;
   recording: boolean = false
   invalidRecognition: boolean = false;
@@ -25,7 +26,8 @@ export class ReviewPage implements OnInit, OnDestroy {
   isNewNode: boolean = false;
   node: string = ""
   Speek: any;
-  segId: string = "translate"
+  segId: string = "translate";
+data:any;
   constructor(private lightnerService: LightnerService,
     private modalCtrl: ModalController,
 
@@ -35,6 +37,7 @@ export class ReviewPage implements OnInit, OnDestroy {
     this.lightnerService.getListLightner().then(list => {
       this.listWord = list;
       this.activeRow = this.listWord[0];
+      this.wordSelectUserData = this.activeRow.CleanText.split(' ')
       this.initialize()
     });
     this.initRecognition();
@@ -87,6 +90,9 @@ export class ReviewPage implements OnInit, OnDestroy {
         on: {
           slideChange: (row) => {
             this.activeRow = this.listWord[row.activeIndex];
+            this.wordSelectUserData = [];
+            //   this.activeRow.wordSelectUser ="";
+            this.wordSelectUserData = this.activeRow.CleanText.split(' ')
             this.speechSynthesis(this.activeRow.en);
           }
         }
@@ -106,6 +112,7 @@ export class ReviewPage implements OnInit, OnDestroy {
     this.lightnerService.speechSynthesis(word);
   }
   ngOnDestroy(): void {
+    SpeechRecognition.removeAllListeners();
     this.modalCtrl.dismiss()
   }
 
@@ -114,35 +121,33 @@ export class ReviewPage implements OnInit, OnDestroy {
     this.invalidRecognition = false;
     this.validRecognition = false;
     this.Speek = "";
-    const { available } = await SpeechRecognition.available();
-    if (available) {
-      SpeechRecognition.start({
-        language: "en-US",
-        maxResults: 4,
-        //prompt: "Say something",
-        partialResults: true,
-        popup: false,
-      });
-      SpeechRecognition.addListener("partialResults", (data: any) => {
-        if (data.matches && data.matches.length > 0) {
-          this.Speek = data.matches[0].toLocaleLowerCase();
-          if (word.toLocaleLowerCase() != data.matches[0].toLocaleLowerCase()) {
-            this.invalidRecognition = true;
-            this.validRecognition = false;
-          }
-          else {
-            this.invalidRecognition = false;
-            this.validRecognition = true;
-          }
+    SpeechRecognition.start({
+      language: "en-US",
+      partialResults: true,
+      popup: false,
+      maxResults: 1,
+      
+    });
+    SpeechRecognition.addListener("partialResults", (data: any) => {
+      if (data.matches && data.matches.length > 0) {
+        this.Speek = data.matches[0].toLocaleLowerCase();
+        if (word.toLocaleLowerCase() != data.matches[0].toLocaleLowerCase()) {
+          this.invalidRecognition = true;
+          this.validRecognition = false;
+          this.activeRow.startSound=false;
         }
-      });
-
-    }
-
+        else {
+          this.invalidRecognition = false;
+          this.validRecognition = true;
+          this.activeRow.startSound=true;
+        }
+      }
+    });
   }
   async stopRecognition() {
     this.recording = false;
     await SpeechRecognition.stop();
+    SpeechRecognition.removeAllListeners();
   }
 
   segmentChanged(ev: any) {
@@ -158,5 +163,80 @@ export class ReviewPage implements OnInit, OnDestroy {
   editNode() {
     this.isNewNode = true;
     this.node = this.activeRow.Node;
+  }
+
+  changeInputTest(e: any, word: _mod.Lightner) {
+    this.removeAllIncorrectclass();
+    word.starTranslate = !word.starTranslate;
+    //document.querySelector('incorrect').remove("incorrect");
+    setTimeout(() => {
+      if (e.target.value == word.fa) {
+        word.starTranslate = true;
+      }
+      else {
+        word.starTranslate = false;
+      }
+    }, 1);
+  }
+
+  speechTestCleanText(text: string) {
+    this.lightnerService.speechSynthesis(text);
+  }
+  clickWordUser(word: string) {
+    this.activeRow.wordSelectUser += ' ' + word;
+    this.activeRow.wordSelectUser = this.activeRow.wordSelectUser.trim();
+
+  }
+  onButtonWordsClick($event: any) {
+    let clickedElement = $event.target || $event.srcElement;
+    if (clickedElement.nodeName === "ION-BUTTON") {
+      let isCertainButtonAlreadyActive = clickedElement.classList.contains('ion-color-warning');
+      if (isCertainButtonAlreadyActive) {
+        //isCertainButtonAlreadyActive.classList.remove("active");
+        clickedElement.color = "primary";
+        const regex = new RegExp(clickedElement.innerText, 'g');
+        this.activeRow.wordSelectUser = this.activeRow.wordSelectUser.replace(regex, '');
+      }
+      else {
+        // clickedElement.className += " active";
+        clickedElement.color = "warning";
+        if (this.activeRow.wordSelectUser) {
+          this.activeRow.wordSelectUser += ' ' + clickedElement.innerText;
+        }
+        else {
+          this.activeRow.wordSelectUser = ' ' + clickedElement.innerText;
+        }
+        this.activeRow.wordSelectUser = this.activeRow.wordSelectUser.trim();
+      }
+    }
+    if (this.activeRow.wordSelectUser?.length >= this.activeRow?.CleanText?.length) {
+      this.checkWordsSelectedOfLightner();
+    }
+  }
+  checkWordsSelectedOfLightner() {
+    this.removeAllIncorrectclass();
+    this.activeRow.starWriting = !this.activeRow.starWriting;
+    setTimeout(() => {
+      if (this.activeRow?.CleanText === this.activeRow.wordSelectUser) {
+        this.activeRow.starWriting = true;
+      }
+      else {
+        this.activeRow.starWriting = false;
+      }
+    }, 1)
+  }
+
+  clearClassBtn() {
+    this.activeRow.wordSelectUser = "";
+    this.activeRow.starWriting = false;
+    document.querySelectorAll('.ion-color-warning').forEach(e => {
+      (e as any).color = 'primary';
+    });
+  }
+
+  removeAllIncorrectclass() {
+    document.querySelectorAll('.incorrect').forEach(e => {
+      e.classList.remove('incorrect');
+    });
   }
 }

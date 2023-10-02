@@ -25,5 +25,10 @@ export interface Lightner{
     fa:string;
     en:string;
     Content:string,
+    CleanText:string,
     Node?:string,
+    starTranslate:boolean,
+    startSound:boolean,
+    starWriting:boolean,
+    wordSelectUser:string,
 }
