@@ -23,7 +23,7 @@ export class SearchPage implements OnInit {
       const swiperParams: SwiperOptions = {
         spaceBetween: 30,
         autoplay:{
-          delay:3000,
+          delay:5000,
           disableOnInteraction:false,
           pauseOnMouseEnter:true,
           waitForTransition:true

@@ -14,7 +14,7 @@ export class ReviewPage implements OnInit, OnDestroy {
   swiperEl: any;
   @ViewChild(IonModal) modal: IonModal;
   @ViewChild(IonModal) modalNode: IonModal;
-  listWord = [];
+  listWord :_mod.Lightner[];
   wordSelectUserData = [];
   activeRow: any;
   initialBreakpoint = 0;
@@ -70,7 +70,6 @@ data:any;
     this.swiperEl.swiper.slideNext();
   }
   initialize() {
-    console.log('init review')
     setTimeout(() => {
       // swiper element
       this.swiperEl = document.getElementById('swiper_review') as any;

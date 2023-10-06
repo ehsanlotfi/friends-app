@@ -1,12 +1,10 @@
-export enum QuoteType
-{
+export enum QuoteType {
     EASY,
     MEDIUM,
     HARD
 }
 
-export interface Quote
-{
+export interface Quote {
     ID: number;
     Content: string,
     Trans: string,
@@ -16,19 +14,25 @@ export interface Quote
     DateSeen: number,
     CntSeen: number,
     showTrans?: boolean,
-    clienWord?:string,
+    clienWord?: string,
 }
 
-export interface Lightner{
+export interface Lightner {
     IdQuote: number;
     seasonId: number;
-    fa:string;
-    en:string;
-    Content:string,
-    CleanText:string,
-    Node?:string,
-    starTranslate:boolean,
-    startSound:boolean,
-    starWriting:boolean,
-    wordSelectUser:string,
+    fa: string;
+    en: string;
+    content: string,
+    CleanText: string,
+    Node?: string,
+    starTranslate: boolean,
+    startSound: boolean,
+    starWriting: boolean,
+    wordSelectUser: string,
+}
+
+export interface Colors {
+    keep: string;
+    temporary: string;
+    forget: string;
 }

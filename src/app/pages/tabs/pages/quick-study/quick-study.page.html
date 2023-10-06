@@ -1,0 +1,18 @@
+
+<ion-content >
+  <div class="container ion-margin">
+    <swiper-container id="swiper_study" class="mySwiper" init="false">
+      <swiper-slide *ngFor="let word of listWord; let i = index"
+      [ngStyle]="{'background-color' : i <3 ? colors.keep : colors.temporary,}"
+      >
+        <h2 class="ion-text-center">
+          {{word.en}}</h2>
+          <h3 class="ion-text-center">
+            {{word.fa}}</h3>
+            <p [innerHTML]="word.content | highlight: word?.en"></p>
+
+      </swiper-slide>
+    </swiper-container>
+
+  </div>
+</ion-content>

@@ -44,8 +44,13 @@ const routes: Routes = [
         path: 'select-user',
         loadChildren: () => import('./pages/select-user/select-user.module').then( m => m.SelectUserPageModule)
       },
+      {
+        path: 'quick-study',
+        loadChildren: () => import('./pages/quick-study/quick-study.module').then( m => m.QuickStudyPageModule)
+      },
     ],
   },
+  
 
  
  
